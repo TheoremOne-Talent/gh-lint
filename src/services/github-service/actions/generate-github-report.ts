@@ -13,7 +13,6 @@ export async function generateGithubReport({
   const result = await getSdk(client).getRepositoryInfo({ owner, name });
 
   if (!result.repository) {
-    console.error('Repository not found');
     return;
   }
 
@@ -21,8 +20,8 @@ export async function generateGithubReport({
 
   const numOfCommits = getNumOfCommits(result);
 
-  const prs = result?.repository?.pullRequests?.nodes ?? [];
-  const commitsCounts = prs.filter(notEmpty).map((pr) => pr.commits.totalCount);
+  const prs = (result?.repository?.pullRequests?.nodes ?? []).filter(notEmpty);
+  const commitsCounts = prs.map((pr) => pr.commits.totalCount);
 
   const averageCommitsPerPr = parseFloat(
     Math.round(sumArray(commitsCounts) / numOfPrs).toFixed(2)
@@ -36,6 +35,7 @@ export async function generateGithubReport({
     averageCommitsPerPr,
     maxCommitsInPr,
     minCommitsInPr,
+    prs,
   };
 
   return report;
