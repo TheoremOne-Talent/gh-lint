@@ -1,0 +1,34 @@
+query getRepositoryInfo($name: String!, $owner: String!) {
+  repository(name: $name, owner: $owner) {
+    pullRequests(last: 50) {
+      nodes {
+        changedFiles
+        commits {
+          totalCount
+        }
+        bodyText
+        title
+        url
+      }
+      totalCount
+    }
+    ref(qualifiedName: "main") {
+      target {
+        __typename
+        ... on Commit {
+          history(first: 50) {
+            totalCount
+            pageInfo {
+              hasNextPage
+            }
+            edges {
+              node {
+                message
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
