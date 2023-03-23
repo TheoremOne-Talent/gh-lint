@@ -8,8 +8,8 @@ const MIN_PRS_THRESHOLD = 3;
 
 const MAX_COMMITS_THRESHOLD = 40;
 
-const MIN_COMMITS_PER_PR_THRESHOLD = 3;
-const MAX_COMMITS_PER_PR_THRESHOLD = 3;
+const MIN_COMMITS_PER_PR_THRESHOLD = 2;
+const MAX_COMMITS_PER_PR_THRESHOLD = 15;
 
 export async function lintAction({ url }: { url: string }) {
   const [, owner, name] = url.match(GH_URL_REGEX) || [];
