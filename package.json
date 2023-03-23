@@ -1,15 +1,16 @@
 {
-  "name": "github-lint",
+  "name": "ghlint",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "CLI tool to lint GitHub repositories",
+  "main": "./out/index.js",
   "scripts": {
-    "compile": "env-cmd graphql-codegen",
-    "watch": "graphql-codegen --watch",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "env-cmd ts-node src/index.ts lint -u https://github.com/TheoremOne-Assessments/Template-Practical-FE-2021-honesto",
+    "prepare": "npm run build",
     "build": "tsc -p . --outDir ./out && chmod +x ./out/index.js",
-    "start": "./out/index.js"
+    "dev": "env-cmd ts-node src/index.ts lint -u https://github.com/TheoremOne-Assessments/Template-Practical-FE-2021-honesto",
+    "start": "./out/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "env-cmd graphql-codegen",
+    "watch": "graphql-codegen --watch"
   },
   "bin": {
     "ghlint": "./out/index.js"
